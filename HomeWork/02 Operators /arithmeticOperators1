@@ -1,0 +1,10 @@
+// Arithmetic Operators. Calculate
+// 01 Write a program that declares two variables num1 and num2, assigns them number values, and then calculates and prints the product of num1 and num2
+
+
+let num1 = 12;
+let num2 = 3;
+
+let total = num1 + num2;
+
+console.log(total);

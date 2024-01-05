@@ -1,43 +1,51 @@
 
 
 describe('Empty Messenger Login Flow Verification', () => {
-    it('should verify the empty Messenger login flow', () => {
+    it(' the empty Messenger login flow', async () => {
         // 1. Launch Facebook website
-        browser.url('https://www.facebook.com/');
+        await browser.url('https://www.facebook.com/');
+        await browser.wait(5000);
 
         // 2. Click on 'Messenger' link
-        const messengerLink = $('[data-testid="Messenger_Button"]');
-        messengerLink.click();
+        const messengerLink = await $(//a[contains(text(),'Messenger')]);
+        await messengerLink.click();
+        await browser.wait(5000);
 
         // 3. Wait for the 'Keep me signed in' checkbox to be displayed
-        const keepMeSignedInCheckbox = $('[name="persistent"]'); // Assuming the name attribute is used for the checkbox
-        keepMeSignedInCheckbox.waitForDisplayed({ timeout: 5000 });
+        const keepMeSignedInCheckbox = await $('//input[@id='u_0_0_3E']');
+        await browser.pause(5000);
+
 
         // 4. Verify 'Keep me signed in' checkbox is NOT selected
-        expect(keepMeSignedInCheckbox.isSelected()).toBe(false);
+        expect(keepMeSignedInCheckbox.isSelected()).to.be.false;
 
         // 5. Click 'Log In' button
-        const loginButton = $('[data-testid="royal_login_button"]');
+        const loginButton = await $('//button[@id='loginbutton']');
         loginButton.click();
+        await browser.pause(5000);
 
         // 6. Wait for the "Find your account and log in" link to be displayed
-        const findAccountLink = $('[data-testid="find_account_link"]');
-        findAccountLink.waitForDisplayed({ timeout: 5000 });
+        const findAccountLink = await $('[data-testid="find_account_link"]');
+        await browser.pause(5000);
 
         // 7. Verify link -> "Find your account and log in" is displayed
-        expect(findAccountLink.isDisplayed()).toBe(true);
+        expect(findAccountLink.isDisplayed()).to.be.true;
 
         // 8. Verify 'Continue' button is enabled
-        const continueButton = $('[data-testid="continue_button"]');
-        expect(continueButton.isEnabled()).toBe(true);
+        const continueButton = await $('//button[@id='loginbutton']');
+        expect(continueButton.isEnabled()).to.be.true;
 
         // 9. Verify 'Keep me signed in' checkbox is NOT selected
-        expect(keepMeSignedInCheckbox.isSelected()).toBe(false);
+        const keepMeSignedInCheckboxMessenger = await $('//label[contains(text(),'ep me si')]')
+        expect(keepMeSignedInCheckboxMessenger.isSelected()).to.be.false;
+        await browser.pause(2000)
 
         // 10. Click 'Keep me signed in' checkbox
-        keepMeSignedInCheckbox.click();
+        await keepMeSignedInCheckboxMessenger.click();
+        await browser.pause(2000)
 
         // 11. Verify 'Keep me signed in' checkbox is selected
-        expect(keepMeSignedInCheckbox.isSelected()).toBe(true);
+        expect(keepMeSignedInCheckboxMessenger.isSelected()).to.be.true
+        await browser.pause(2000);
     });
 });

@@ -21,7 +21,7 @@ exports.config = {
     // of the config file unless it's absolute.
     //
     specs: [
-        './tests/session2/bassicFunctions.js'
+        './tests/TC-2/tc3.js'
     ],
     // Patterns to exclude.
     exclude: [
